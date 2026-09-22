@@ -26,14 +26,15 @@
     }
 
     /* Header Section */
-    header {
+    .checklist-banner {
         background-color: #3c1f57;
         color: white;
         text-align: center;
-        padding: 50px 0;
+        padding: 50px 20px;
+        margin-top: 100px;
     }
 
-    header h1 {
+    .checklist-banner h1 {
         font-size: 3rem;
     }
 
@@ -106,10 +107,10 @@
 
 {% block main_block %}
 <!-- Header Section -->
-<header>
+<div class="checklist-banner">
     <h1>Adoption Checklist</h1>
     <p>Your step-by-step guide to a successful pet adoption</p>
-</header>
+</div>
 
 <!-- Main Content -->
 <div class="container">

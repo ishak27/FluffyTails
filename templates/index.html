@@ -113,7 +113,7 @@
             <i class="fa-solid fa-shield-dog fa-2xl"></i><br><br><br>
             <h4>CHECKLIST FOR NEW ADOPTERS</h4>
             <p>Make the adoption transition as smooth as possible.</p>
-            <button class="outline-btn">LEARN MORE</button>
+            <a href="{{url_for('checklist')}}"><button class="outline-btn">LEARN MORE</button></a>
         </div>
 
         <div class="grid-item">
@@ -137,7 +137,7 @@
 
 <div class="i1">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVPcyqL8Vc74dbI5gtgT3UBNLfqvdErTYthA&s" alt="">
-    <img src="./static/image2.webp" alt="Fluffy Tails">
+    <img src="{{ url_for('static', filename='image2.webp') }}" alt="Fluffy Tails">
 </div>
 
 <br><br><br>
@@ -185,7 +185,7 @@
     <div class="more-pets">
         <i class="fa-solid fa-paw fa-2xl"></i><br>
         <p>5 more pets available on Petfinder</p>
-        <div class="meet-btn">MEET THEM</div>
+        <a href="{{url_for('cats')}}"><div class="meet-btn">MEET THEM</div></a>
     </div>
 </div>
 

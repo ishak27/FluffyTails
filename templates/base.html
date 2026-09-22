@@ -337,7 +337,7 @@
 <body>
     <header class="navbar6">
         <div class="logo6">
-            <img src="./static/image.png" alt="Feelzy-Music">
+            <img src="{{ url_for('static', filename='image.png') }}" alt="Fluffy Tails">
         </div>
         <div class="box6">
             <a href="#J1">
@@ -424,9 +424,11 @@
     <div class="cart6">
         <a href="{{url_for('cart')}}"><i class="fa-solid fa-cart-shopping fa-lg"></i>   Cart</a>
     </div>
-    <!-- <div class="admin6">
-        <a href="{{url_for('admin_dashboard')}}">Admin</a>
-    </div> -->
+    {% if current_user.role == 'admin' %}
+    <div class="cart6">
+        <a href="{{url_for('admin_dashboard')}}"><i class="fa-solid fa-gauge-high fa-lg"></i> Admin</a>
+    </div>
+    {% endif %}
     <div class="logout6">
         <a href="{{url_for('logout')}}"><i class="fa-solid fa-right-from-bracket fa-lg"></i>  Logout</a>
     </div>
@@ -516,7 +518,7 @@
 
     <footer>
         <div class="top-bar">
-            <img src="./static/image.png" alt="Fluffy Tails">
+            <img src="{{ url_for('static', filename='image.png') }}" alt="Fluffy Tails">
             <span>Your Pet, Our Passion.™</span>
         </div>
 

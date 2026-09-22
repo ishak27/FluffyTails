@@ -22,14 +22,15 @@
 
         .container {
             display: flex;
-            margin-top: 230px;
+            margin-top: 140px;
+            margin-bottom: 50px;
             height: 80%; /* Allow space for padding */
             width: 70%; /* Adjust width for better proportions */
             border-radius: 20px; /* More rounded corners */
             overflow: hidden;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
             background-color: white;
-            transform: translateY(-30px); /* Slight upward tilt effect */
+            transform: translateY(-10px);
         }
 
         
@@ -169,16 +170,16 @@
             <img src="https://img.freepik.com/premium-photo/painting-dog-cat-sitting-together-generative-ai_902639-102332.jpg" alt="Welcome Image" class="welcome-image">
         </div>
         <div class="right">
-            <img src="./static/image.png" alt="Logo" class="logo">
+            <img src="{{ url_for('static', filename='image.png') }}" alt="Logo" class="logo">
             <h2>Welcome to FluffyTails!!</h2>
             <h3>Log in or Sign up to save your favourite pets.</h3>
             <br><br>
             <div class="buttons">
-                <a href="SignUp.html">
+                <a href="{{ url_for('signup') }}">
                     <button class="btn" id="create-account">Create Account</button>
                 </a>
 
-                <a href="LogIn.html">
+                <a href="{{ url_for('login') }}">
                     <button class="btn" id="login">Login</button>
                 </a>
             </div>

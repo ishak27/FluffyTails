@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title_block %}Profile Page{% endblock %}
+{% block title %}Profile - FluffyTails{% endblock %}
 
 {% block head %}
 <style>
@@ -10,6 +10,7 @@
         color: #333;
         text-align: center;
         position: relative;
+        min-height: 100vh;
     }
 
     body::before {
@@ -26,7 +27,7 @@
 
     .profile-card {
         max-width: 500px;
-        margin: 200px auto 50px auto;
+        margin: 140px auto 50px auto;
         background: #fffafc;
         padding: 40px;
         border-radius: 25px;
@@ -63,23 +64,24 @@
         border-radius: 10px;
     }
 
-    .btn {
-        display: inline-block;
-        margin-top: 30px;
-        padding: 12px 25px;
-        margin-left: 105px;
+    .btn-profile {
+        display: block;
+        width: fit-content;
+        margin: 30px auto 0 auto;
+        padding: 12px 30px;
         background-color: #7e5bef;
         color: white;
         font-weight: 600;
         border: none;
         border-radius: 12px;
         text-decoration: none;
-        transition: background-color 0.3s ease;
-        
+        transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
-    .btn:hover {
+    .btn-profile:hover {
         background-color: #6c47e0;
+        color: white;
+        transform: translateY(-2px);
     }
 
     @keyframes fadeInUp {
@@ -103,6 +105,6 @@
     <p><strong>Email:</strong> {{ current_user.email }}</p>
     <p><strong>Mobile:</strong> {{ current_user.mobile }}</p>
     <p><strong>Role:</strong> {{ current_user.role }}</p>
-    <a href="{{ url_for('dashboard') }}" class="btn" >Back to Dashboard</a>
+    <a href="{{ url_for('admin_dashboard') if current_user.role == 'admin' else url_for('home') }}" class="btn btn-profile">Back to {{ 'Admin Dashboard' if current_user.role == 'admin' else 'Home' }}</a>
 </div>
 {% endblock %}

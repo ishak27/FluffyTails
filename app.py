@@ -12,11 +12,11 @@ app=Flask(__name__)
 
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + \
-    os.path.join(basedir, "app.db")
-app.config["SQLALCHEMY_TRACK_MODIFICATION"] = False
+    os.path.join(basedir, "app.db").replace("\\", "/")
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
-app.config["SECRET_KEY"] = "Your secret key"
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "fluffy_tails_secret_key_2025")
 
 
 
@@ -76,7 +76,7 @@ class Cart(db.Model):  # Move Cart model above db.create_all()
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return db.session.get(User, int(user_id))
 
 
 
@@ -220,6 +220,8 @@ def add_pet():
 @admin_required
 def delete_pet(pet_id):
     pet = Pet.query.get_or_404(pet_id)
+    # Remove associated cart items to prevent foreign key issues
+    Cart.query.filter_by(pet_id=pet.id).delete()
     db.session.delete(pet)
     db.session.commit()
 
@@ -237,7 +239,8 @@ def admin_dashboard():
 @login_required
 @admin_required  # Apply the decorator here
 def admin():
-    return render_template("admin.html")
+    users = User.query.all()
+    return render_template("admin.html", users=users)
 
 
 
@@ -311,19 +314,20 @@ def welcome():
 @login_required
 def add_to_cart(pet_id):
     pet = Pet.query.get_or_404(pet_id)
-    
+    target_url = request.referrer or (url_for('dogs') if pet.category == 'dog' else url_for('cats'))
+
     # Check if pet is already in the cart
     existing_item = Cart.query.filter_by(user_id=current_user.id, pet_id=pet_id).first()
     if existing_item:
         flash('This pet is already in your cart!', 'warning')
-        return redirect(url_for('dogs'))
+        return redirect(target_url)
 
     new_cart_item = Cart(user_id=current_user.id, pet_id=pet.id)
     db.session.add(new_cart_item)
     db.session.commit()
     
     flash(f'{pet.name} added to your cart!', 'success')
-    return redirect(url_for('dogs'))
+    return redirect(target_url)
 
 @app.route('/cart')
 @login_required
@@ -358,8 +362,11 @@ def adopt_all_pets():
     for item in cart_items:
         if item.pet:
             adopted_names.append(item.pet.name)
+            # Remove this pet from any other user's cart as well
+            Cart.query.filter_by(pet_id=item.pet.id).delete()
             db.session.delete(item.pet)  # Remove pet from database
-        db.session.delete(item)  # Remove cart item
+        else:
+            db.session.delete(item)
 
     db.session.commit()
 
@@ -367,4 +374,4 @@ def adopt_all_pets():
     return redirect(url_for('cart'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='127.0.0.1', port=5000)

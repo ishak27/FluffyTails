@@ -1,34 +1,129 @@
 {% extends "base.html" %}
 
-{% block title %} Admin Page {% endblock %}
+{% block title %}Admin Panel - Registered Users{% endblock %}
 
 {% block head %}
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; background: purple; padding: 50px; }
-        table { width: 50%; margin: auto; border-collapse: collapse; background: white; margin-top: 230px; }
-        th, td { padding: 10px; border: 1px solid #ddd; }
-        h2{
-            margin-top: 200px;
+        body {
+            background-color: #6a23d5;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            min-height: 100vh;
         }
-
+        .admin-users-card {
+            background: linear-gradient(135deg, #f8cdda, #e8a5bd);
+            color: #4a235a;
+            border-radius: 15px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 900px;
+            margin: 140px auto 60px auto;
+            padding: 35px 30px;
+        }
+        .admin-users-card h2 {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #540c55;
+            margin-bottom: 25px;
+        }
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .admin-table th {
+            background-color: #540c55;
+            color: white;
+            padding: 12px 16px;
+            font-weight: 600;
+        }
+        .admin-table td {
+            padding: 10px 16px;
+            border-bottom: 1px solid #e0d0e0;
+            color: #333;
+        }
+        .admin-table tr:hover {
+            background-color: #fdf5f9;
+        }
+        .role-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .role-admin {
+            background-color: #ffd1dc;
+            color: #7c1a5b;
+        }
+        .role-user {
+            background-color: #e2f0d9;
+            color: #385723;
+        }
+        .admin-links {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .admin-links a {
+            color: #540c55;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 8px 18px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+        .admin-links a:hover {
+            background-color: #540c55;
+            color: white;
+        }
     </style>
 {% endblock %}
 
-
 {% block main_block %}
-    <h2>Admin Panel - User Data</h2>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-        </tr>
-        {% for user in users %}
-        <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+<div class="admin-users-card">
+    <h2>Registered Users</h2>
+    <div class="table-responsive">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td><strong>{{ user.name }}</strong></td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.mobile }}</td>
+                    <td>
+                        <span class="role-badge role-{{ user.role }}">{{ user.role }}</span>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">No users found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="admin-links">
+        <a href="{{ url_for('admin_dashboard') }}"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+        <a href="{{ url_for('add_pet') }}"><i class="fa-solid fa-plus"></i> Add Pet</a>
+    </div>
+</div>
 {% endblock %}
