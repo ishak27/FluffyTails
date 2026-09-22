@@ -66,35 +66,35 @@ It provides users with an intuitive interface to browse dogs and cats, learn abo
 ```text
 FluffyTails/
 │
-├── app.py                     # Main Flask application (routes, models, auth, carts)
-├── app.db                     # SQLite database storing users, pets, and cart items
-├── requirements.txt           # Python package dependencies
-├── run.bat                    # One-click Windows batch launcher
-├── run.ps1                    # Windows PowerShell launcher script
+├── app.py                     
+├── app.db                     
+├── requirements.txt          
+├── run.bat                    
+├── run.ps1                    
 │
-├── static/                    # Static assets
-│   ├── ADS.jpg                # Promotional & shelter banners
-│   ├── image.png              # FluffyTails official logo
-│   ├── image2.webp            # Homepage banner image
-│   ├── img3.png               # Graphic assets
-│   └── index.css              # Custom stylesheet
+├── static/                    
+│   ├── ADS.jpg                
+│   ├── image.png             
+│   ├── image2.webp            
+│   ├── img3.png              
+│   └── index.css              
 │
-├── templates/                 # Jinja2 HTML templates
-│   ├── base.html              # Master layout (navbar, footer, auth state)
-│   ├── index.html             # Homepage & pet highlights
-│   ├── dashboard.html         # Guest landing page
-│   ├── LogIn.html             # User & Admin login form
-│   ├── SignUp.html            # User registration form
-│   ├── profile.html           # User profile view
-│   ├── cart.html              # Adoption cart & checkout
-│   ├── dogs.html              # Dog adoption catalog
-│   ├── cats.html              # Cat adoption catalog
-│   ├── checklist.html         # New adopter preparation checklist
-│   ├── admin_dashboard.html   # Admin pet inventory management & deletion
-│   ├── admin.html             # Admin registered user directory
-│   ├── add_pet.html           # Add new pet form
-│   ├── aboutus.html           # About FluffyTails
-│   ├── contactus.html         # Contact page
+├── templates/                 
+│   ├── base.html              
+│   ├── index.html             
+│   ├── dashboard.html         
+│   ├── LogIn.html             
+│   ├── SignUp.html            
+│   ├── profile.html           
+│   ├── cart.html              
+│   ├── dogs.html              
+│   ├── cats.html              
+│   ├── checklist.html        
+│   ├── admin_dashboard.html   
+│   ├── admin.html             
+│   ├── add_pet.html           
+│   ├── aboutus.html           
+│   ├── contactus.html         
 │   └── ...
 │
-└── README.md                  # Project documentation
+└── README.md                  
