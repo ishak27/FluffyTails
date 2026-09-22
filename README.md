@@ -1,102 +1,100 @@
-# 🐾 FluffyTails - Pet Adoption System
+# 🐾 FluffyTails - Online Pet Adoption & Care Platform
 
-A clean, responsive Flask web application for pet adoption, browsing dogs and cats, managing user adoptions via a shopping cart, and administering pets and user accounts.
+**FluffyTails** is a full-featured, web-based pet adoption and shelter management platform designed to connect animal lovers with pets in need of a loving forever home.
 
----
-
-## 🚀 Quick Start on Windows
-
-### Option 1: One-Click Launch
-- Double-click **`run.bat`** (or right-click `run.ps1` and select **Run with PowerShell**).
-- This will automatically verify/activate the Windows virtual environment (`venv`), install dependencies if needed, and start the local web server.
-
-### Option 2: Manual Setup (Terminal / PowerShell)
-
-1. **Open PowerShell or Command Prompt** in the project directory:
-   ```powershell
-   cd "c:\Users\jitu3\OneDrive\Desktop\Project2"
-   ```
-
-2. **Activate the Windows Virtual Environment**:
-   ```powershell
-   .\venv\Scripts\activate
-   ```
-
-3. **Install Dependencies** (if not already installed):
-   ```powershell
-   pip install -r requirements.txt
-   ```
-
-4. **Run the Application**:
-   ```powershell
-   python app.py
-   ```
-
-5. Open your browser and navigate to:
-   👉 **[http://127.0.0.1:5000](http://127.0.0.1:5000)**
+It provides users with an intuitive interface to browse dogs and cats, learn about pet care, and manage adoptions through a unified cart system, while offering administrators robust tools to manage pet listings and user records.
 
 ---
 
-## 🔑 Default Accounts
+## ✨ Features
 
-| Role | Email | Password | Access |
-|---|---|---|---|
-| **Admin** | `admin@gmail.com` | `admin123` | Full access: Add/delete pets, view registered users, admin dashboard |
-| **User** | Register any account via `/signup` | User choice | Browse pets, add to cart, complete adoptions, view profile |
-
----
-
-## 📁 Project Architecture
-
-```
-Project2/
-│── app.py                 # Core Flask backend (routes, models, auth, carts)
-│── app.db                 # SQLite database (Users, Pets, Cart)
-│── requirements.txt       # Python package dependencies
-│── run.bat                # Windows Batch one-click launcher
-│── run.ps1                # Windows PowerShell launcher
-│── README.md              # Project documentation
-│── venv/                  # Windows Python 3.12 Virtual Environment
-│── static/                # Static assets (images, banners, styling)
-│   ├── ADS.jpg
-│   ├── image.png          # FluffyTails logo
-│   ├── image2.webp
-│   └── index.css
-└── templates/             # Jinja2 HTML Templates
-    ├── base.html          # Global layout, navigation header & footer
-    ├── index.html         # User landing page & pet highlights
-    ├── dashboard.html     # Welcome guest dashboard
-    ├── LogIn.html         # User / Admin login page
-    ├── SignUp.html        # New user registration page
-    ├── profile.html       # User profile details
-    ├── cart.html          # Adoption cart & checkout
-    ├── dogs.html          # Dog adoption & breed catalog
-    ├── cats.html          # Cat adoption & breed catalog
-    ├── checklist.html     # Adopter preparation checklist
-    ├── admin_dashboard.html # Pet inventory management (add/delete)
-    ├── admin.html         # User administration panel
-    └── ...
-```
+* **Pet Catalog & Search**:
+  * Browse dogs, puppies, cats, and kittens with filters for breed, age, and location distance
+  * Detailed pet profile cards with high-quality photos and companion details
+* **Adoption Cart & Checkout**:
+  * Save favorite pets to an adoption cart
+  * Review cart items and complete multi-pet adoption in a single click
+  * Dynamic cart updates and empty-state messaging
+* **Educational & Care Resources**:
+  * **Adoption Checklist**: Step-by-step preparation guide for first-time adopters
+  * **Dog Age Calculator**: Interactive conversion chart translating dog years to human years across breeds
+  * **Pet FAQs & Behavior Guides**: Comprehensive advice on pet behavior, training, and smooth transition
+* **User Authentication & Profiles**:
+  * Secure user registration and login with encrypted passwords (Bcrypt)
+  * Dedicated user profile page displaying account details and role status
+* **Admin Portal**:
+  * Admin dashboard for monitoring all active pet listings
+  * Add new pets with custom images, breeds, age, distance, and categories (`dog`/`cat`)
+  * Delete pet listings with automatic cascade cleanup of cart entries
+  * Admin panel to inspect all registered users with contact details and role badges
 
 ---
 
-## 🛠 Features & Improvements
+## ⚙️ How It Works
 
-- **Fully Windows-Native**:
-  - Removed all macOS artifact folders (`__MACOSX`, `.DS_Store`, and macOS binaries).
-  - Flattened nested folders so the app lives directly at root.
-  - Normalized SQLite Windows path separators (`replace('\', '/')`).
-- **Clean Authentication**:
-  - Secure Bcrypt password hashing.
-  - Role-based authorization (`admin` vs `user`) with protected routes.
-- **Cart & Adoption Workflow**:
-  - Users can browse dogs or cats, add pets to cart, view details, remove pets, or complete adoption with 1 click.
-  - Cascade deletion protection prevents orphan foreign key entries when pets are deleted or adopted.
-- **Admin Capabilities**:
-  - Admin dashboard displaying all inventory with quick deletion.
-  - Add pet form supporting breeds, distance, age, and photo URLs.
-  - Admin panel to inspect all registered users and roles.
-- **Responsive & Modern UI**:
-  - Clean purple/lavender aesthetic.
-  - Styled flash alerts for user feedback.
-  - Navigation links dynamically adapt based on authentication state.
+1. **Browsing & Discovery**:
+   * Visitors browse available pets across categories (Dogs & Puppies, Cats & Kittens).
+   * Each pet profile highlights the animal's breed, age, location distance, and adoption readiness.
+
+2. **Adoption Cart Workflow**:
+   * Users create an account or log in to add pets to their adoption cart.
+   * Users can review their selections, remove pets individually, or click **"Adopt All Pets"** to finalize the adoption.
+   * Upon adoption, the database updates automatically, removing adopted pets from public view.
+
+3. **Admin Pet & User Management**:
+   * Administrators log in through the portal to access the **Admin Dashboard** and **User Directory**.
+   * Admins can post newly rescued animals into the database or remove entries when adoptions are completed.
+
+---
+
+## 🛠️ Technologies Used
+
+* **Python 3.12** – Core backend programming language
+* **Flask** – Lightweight web application framework
+* **Flask-SQLAlchemy & SQLite** – Relational database management and ORM modeling
+* **Flask-Login** – Session handling, role-based authorization, and route protection
+* **Flask-Bcrypt** – Secure password hashing
+* **HTML5 & Jinja2** – Semantic templating, dynamic layout inheritance, and components
+* **CSS3 & Bootstrap** – Modern purple/lavender styling, responsive grid layouts, and animations
+* **FontAwesome** – Vector iconography
+* **Git & GitHub** – Version control and collaboration
+
+---
+
+## 📁 Project Structure
+
+```text
+FluffyTails/
+│
+├── app.py                     # Main Flask application (routes, models, auth, carts)
+├── app.db                     # SQLite database storing users, pets, and cart items
+├── requirements.txt           # Python package dependencies
+├── run.bat                    # One-click Windows batch launcher
+├── run.ps1                    # Windows PowerShell launcher script
+│
+├── static/                    # Static assets
+│   ├── ADS.jpg                # Promotional & shelter banners
+│   ├── image.png              # FluffyTails official logo
+│   ├── image2.webp            # Homepage banner image
+│   ├── img3.png               # Graphic assets
+│   └── index.css              # Custom stylesheet
+│
+├── templates/                 # Jinja2 HTML templates
+│   ├── base.html              # Master layout (navbar, footer, auth state)
+│   ├── index.html             # Homepage & pet highlights
+│   ├── dashboard.html         # Guest landing page
+│   ├── LogIn.html             # User & Admin login form
+│   ├── SignUp.html            # User registration form
+│   ├── profile.html           # User profile view
+│   ├── cart.html              # Adoption cart & checkout
+│   ├── dogs.html              # Dog adoption catalog
+│   ├── cats.html              # Cat adoption catalog
+│   ├── checklist.html         # New adopter preparation checklist
+│   ├── admin_dashboard.html   # Admin pet inventory management & deletion
+│   ├── admin.html             # Admin registered user directory
+│   ├── add_pet.html           # Add new pet form
+│   ├── aboutus.html           # About FluffyTails
+│   ├── contactus.html         # Contact page
+│   └── ...
+│
+└── README.md                  # Project documentation
